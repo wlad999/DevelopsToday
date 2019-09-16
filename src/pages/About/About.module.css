@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+}
+
+.wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    flex: 1;
+    width: 100%;
+    text-align: start;
+    margin: 0;
+}
+
+.footer {
+    flex: 0 0 auto;
+}
+
+.header {
+    flex: 0 0 auto;
+}
+
+.scroll {
+    overflow-y: auto;
+    height: 400px;
+}

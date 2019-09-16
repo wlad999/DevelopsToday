@@ -1,0 +1,32 @@
+.wrapper {
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px double #000080;
+}
+
+.logo {
+  height: 30px;
+  padding-left: 10px;
+}
+
+
+.nav {
+  padding-right: 10px;
+}
+
+.link {
+  padding: 0 10px 0 10px;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.link :target {
+  color: red;
+}
+
+a:active {
+  color: #f00;
+}

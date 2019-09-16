@@ -1,0 +1,25 @@
+.wrapper {
+  height: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  border-top: 3px double #000080;
+
+}
+
+
+.nav {
+  padding-right: 10px;
+}
+
+.link {
+  padding: 0 10px 0 10px;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.link :target {
+  color: red;
+}
