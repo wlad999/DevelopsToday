@@ -1,14 +1,17 @@
-import { getPostsRequest, getComentsRequest } from "../../api/request";
+import {
+  getPostsRequest,
+  getComentsRequest,
+  putComentsRequest
+} from "../../api/request";
 let GET_POSTS = "GET_POSTS";
-let SET_POST = "SET_POST";
+let DEL_POST = "DEL_POST";
 let SET_CARRENT_PAGE = "SET_CARRENT_PAGE";
-let SET_COMENTS = "SET_COMENTS";
+let SET_POST_DATA = "SET_POST_DATA";
 
 let initialState = {
   posts: [],
   currentPage: 1,
-  selectedPost: {},
-  coments: []
+  dataPost: {}
 };
 
 const potsReducer = (state = initialState, action) => {
@@ -18,20 +21,20 @@ const potsReducer = (state = initialState, action) => {
         ...state,
         posts: action.posts
       };
-    case SET_POST:
+    case DEL_POST:
       return {
         ...state,
-        selectedPost: action.post
+        dataPost: action.dataPost
       };
     case SET_CARRENT_PAGE:
       return {
         ...state,
         currentPage: action.currentPage
       };
-    case SET_COMENTS:
+    case SET_POST_DATA:
       return {
         ...state,
-        coments: action.coments
+        dataPost: action.dataPost
       };
 
     default:
@@ -43,22 +46,16 @@ export const getPostsAC = posts => ({
   type: GET_POSTS,
   posts
 });
-export const setSelectedPostAC = post => ({
-  type: SET_POST,
-  post
-});
+
 export const delPostAC = () => ({
-  type: SET_POST,
-  post: {}
+  type: DEL_POST,
+  dataPost: {}
 });
-export const setComentsAC = coments => ({
-  type: SET_COMENTS,
-  coments
+export const setComentsAC = dataPost => ({
+  type: SET_POST_DATA,
+  dataPost
 });
-export const delComentsAC = () => ({
-  type: SET_COMENTS,
-  coments: []
-});
+
 export const currentPageAC = currentPage => ({
   type: SET_CARRENT_PAGE,
   currentPage
@@ -66,6 +63,8 @@ export const currentPageAC = currentPage => ({
 export const getPostsThunk = () => {
   return dispatch => {
     getPostsRequest().then(response => {
+      // console.log("POSTS", response);
+
       dispatch(getPostsAC(response.data));
     });
   };
@@ -73,9 +72,16 @@ export const getPostsThunk = () => {
 export const getComentsThunk = id => {
   return dispatch => {
     getComentsRequest(id).then(response => {
+      // console.log("response", response);
+      dispatch(setComentsAC(response.data));
+    });
+  };
+};
+export const setComentsThunk = data => {
+  return dispatch => {
+    putComentsRequest({ ...data }).then(response => {
       console.log("response", response);
-
-      dispatch(setComentsAC(response.data.comments));
+      // dispatch(setComentsAC(response.data));
     });
   };
 };

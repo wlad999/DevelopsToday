@@ -2,42 +2,58 @@ import React from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import styles from "./Posts.module.css";
+import Form from "../../components/Form";
 import {
   getComentsThunk,
   delPostAC,
-  delComentsAC
+  setComentsThunk
 } from "../../redux/reducers/postsReducer";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 class SelectPost extends React.Component {
-  state = {};
+  state = {
+    value: ""
+  };
+
+  setComenst = e => {
+    this.setState({ value: e.target.value });
+  };
+  onSubmit = e => {
+    e.preventDefault();
+    // console.log(this.state.value);
+    this.props.setComentsThunk({
+      postId: this.props.match.params.id,
+      body: this.state.value
+    });
+    this.setState({ value: "" });
+  };
+
   componentDidMount() {
     this.props.getComentsThunk(this.props.match.params.id);
   }
 
   componentWillUnmount() {
     this.props.delPostAC();
-    this.props.delComentsAC();
   }
   render() {
-    console.log("this.props", this.props);
     return (
       <div className={styles.wrapper}>
         <Header />
-        {this.props.selectedPost ? (
+        {this.props.dataPost ? (
           <div className={styles.main}>
-            <p>TITLE: {this.props.selectedPost.title}</p>
-            <p>USER ID: {this.props.selectedPost.id}</p>
-            <p>POST: {this.props.selectedPost.body}</p>
-            <p>AUTOR: {this.props.selectedPost.author}</p>
-            {this.props.selectedPost.data && (
-              <p>DATA: {this.props.selectedPost.data}</p>
+            <p>TITLE: {this.props.dataPost.title}</p>
+            <p>USER ID: {this.props.dataPost.id}</p>
+            <p>POST: {this.props.dataPost.body}</p>
+            <p>AUTOR: {this.props.dataPost.author}</p>
+            {this.props.dataPost.data && (
+              <p>DATA: {this.props.dataPost.date}</p>
             )}
             <p>COMENTS:</p>
-            {this.props.coments && this.props.coments.length > 0 ? (
+            {this.props.dataPost.comments &&
+            this.props.dataPost.comments.length > 0 ? (
               <div className={styles.list}>
-                {this.props.coments.map(com => (
+                {this.props.dataPost.comments.map(com => (
                   <div key={com.id}>
                     <div>id: {com.id}</div>
                     <div className={styles.com}>body: {com.body}</div>
@@ -47,12 +63,30 @@ class SelectPost extends React.Component {
             ) : (
               <p>NO Coments</p>
             )}
+            <Form
+              setComenst={this.setComenst}
+              value={this.state.value}
+              onSubmit={this.onSubmit}
+            />
+            {/* <form>
+              <div>
+                <textarea
+                  onChange={this.setComenst}
+                  value={this.state.value}
+                  placeholder="enter your comment"
+                  cols="30"
+                  rows="5"
+                />
+              </div>
+              <button onClick={this.onSubmit}>SUBMIT</button>
+            </form> */}
           </div>
         ) : (
           <NavLink className={styles.mainEmpty} to={"/"}>
             What are you waiting for??? - click on something !!!
           </NavLink>
         )}
+
         <Footer />
       </div>
     );
@@ -60,11 +94,14 @@ class SelectPost extends React.Component {
 }
 
 const MSTP = state => ({
-  selectedPost: state.postsPage.selectedPost,
-  coments: state.postsPage.coments
+  dataPost: state.postsPage.dataPost
 });
 
 export default connect(
   MSTP,
-  { getComentsThunk, delPostAC, delComentsAC }
+  {
+    getComentsThunk,
+    delPostAC,
+    setComentsThunk
+  }
 )(SelectPost);

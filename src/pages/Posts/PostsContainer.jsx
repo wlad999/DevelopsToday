@@ -6,7 +6,6 @@ import styles from "./Posts.module.css";
 import Posts from "./Posts";
 import {
   getPostsThunk,
-  setSelectedPostAC,
   currentPageAC
 } from "../../redux/reducers/postsReducer";
 
@@ -24,7 +23,6 @@ class PostsContainer extends React.Component {
           <Posts
             posts={this.props.posts}
             currentPage={this.props.currentPage}
-            setSelectedPostAC={this.props.setSelectedPostAC}
             currentPageAC={this.props.currentPageAC}
           />
         </div>
@@ -40,5 +38,5 @@ let MSTP = state => ({
 
 export default connect(
   MSTP,
-  { getPostsThunk, setSelectedPostAC, currentPageAC }
+  { getPostsThunk, currentPageAC }
 )(PostsContainer);

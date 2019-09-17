@@ -16,15 +16,6 @@ const Posts = props => {
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
-  // let currentArrPosts = [];
-  // if (props.posts && props.posts.length > 0) {
-  //   console.log("ARR", props.posts.length);
-  //   for (let i = 0; i < props.posts.length; i++) {
-  //     if (i < currentPage * 10) {
-  //       currentArrPosts.push(props.posts[i]);
-  //     }
-  //   }
-  // }
 
   let arrOfPosts = props.posts.filter(el => {
     if (
@@ -34,8 +25,6 @@ const Posts = props => {
       return el;
     }
   });
-
-  // console.log("currentArrPosts", currentArrPosts);
 
   return (
     <div>
@@ -56,12 +45,7 @@ const Posts = props => {
         {arrOfPosts.map(Post => {
           return (
             <div className={styles.page} key={Post.id}>
-              <NavLink
-                className={styles.nav}
-                to={`/posts/${Post.id}`}
-                // onClick={() => props.setSelectedPostAC(Post)
-                // }
-              >
+              <NavLink className={styles.nav} to={`/posts/${Post.id}`}>
                 <div className={styles.text}>TITLE {Post.title}</div>
                 <div className={styles.text}>AUTOR {Post.author}</div>
                 {Post.date && (
