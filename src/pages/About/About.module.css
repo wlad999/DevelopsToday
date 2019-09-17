@@ -13,6 +13,10 @@
     width: 100%;
     text-align: start;
     margin: 0;
+    background-image: url(../../slider0.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-left: 10px;
 }
 
 .footer {
@@ -21,9 +25,4 @@
 
 .header {
     flex: 0 0 auto;
-}
-
-.scroll {
-    overflow-y: auto;
-    height: 400px;
 }

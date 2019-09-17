@@ -4,7 +4,6 @@ import * as api from "./api";
 export const getPostsRequest = () => {
   return Axios.get(api.url.posts())
     .then(resp => {
-      // console.log(resp);
       if (resp.status !== 200) {
         throw new Error("ERROR");
       }
@@ -15,7 +14,6 @@ export const getPostsRequest = () => {
 export const getComentsRequest = id => {
   return Axios.get(api.url.selectedComents(id))
     .then(resp => {
-      // console.log(resp);
       if (resp.status !== 200) {
         throw new Error("ERROR");
       }

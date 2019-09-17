@@ -8,15 +8,18 @@ const Contact = () => (
   <div className={styles.wrapper}>
     <Header />
     <main className={styles.main}>
-      <h2>CONTACT</h2>
-      <p>Vorobkevich St., 33, Chernivtsi, Chernivtsi region 58000, UA</p>
+      <h3>CONTACT</h3>
+      <h4>Ph: +1 (347) 708-0171</h4>
+      <h4>Sales: sales@develops.today</h4>
+      <h4>Jobs: hr@develops.today</h4>
+      <h4>General Info: info@develops.today</h4>
       <div>
-        <a href="http://zazend.com" target="_blank">
-          http://zazend.com
+        <a href="http://develops.today/" target="_blank">
+          http://develops.today
         </a>
       </div>
       <NavLink className={styles.nav} to={"/"}>
-        <h3>Don`t thinking - go to Chernivtsi right now!</h3>
+        <h3>Don`t thinking - call us right now!</h3>
       </NavLink>
     </main>
     <div className={styles.header}>

@@ -1,0 +1,6 @@
+export const actionTypes = {
+  GET_POSTS: "GET_POSTS",
+  DEL_POST: "DEL_POST",
+  SET_CARRENT_PAGE: "SET_CARRENT_PAGE",
+  SET_POST_DATA: "SET_POST_DATA"
+};

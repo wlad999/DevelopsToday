@@ -2,14 +2,15 @@ import React from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import styles from "./Posts.module.css";
-import Form from "../../components/Form";
+import Form from "../../components/Form/Form";
+import RetrievePost from "./RetrievePost";
 import {
   getComentsThunk,
   delPostAC,
   setComentsThunk
-} from "../../redux/reducers/postsReducer";
+} from "../../redux/action/postsAction";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { getDataPost } from "../../redux/selectors/postsSelectots";
 
 class SelectPost extends React.Component {
   state = {
@@ -21,7 +22,6 @@ class SelectPost extends React.Component {
   };
   onSubmit = e => {
     e.preventDefault();
-    // console.log(this.state.value);
     this.props.setComentsThunk({
       postId: this.props.match.params.id,
       body: this.state.value
@@ -35,58 +35,21 @@ class SelectPost extends React.Component {
 
   componentWillUnmount() {
     this.props.delPostAC();
+    console.log(this.props);
   }
   render() {
     return (
       <div className={styles.wrapper}>
         <Header />
-        {this.props.dataPost ? (
-          <div className={styles.main}>
-            <p>TITLE: {this.props.dataPost.title}</p>
-            <p>USER ID: {this.props.dataPost.id}</p>
-            <p>POST: {this.props.dataPost.body}</p>
-            <p>AUTOR: {this.props.dataPost.author}</p>
-            {this.props.dataPost.data && (
-              <p>DATA: {this.props.dataPost.date}</p>
-            )}
-            <p>COMENTS:</p>
-            {this.props.dataPost.comments &&
-            this.props.dataPost.comments.length > 0 ? (
-              <div className={styles.list}>
-                {this.props.dataPost.comments.map(com => (
-                  <div key={com.id}>
-                    <div>id: {com.id}</div>
-                    <div className={styles.com}>body: {com.body}</div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p>NO Coments</p>
-            )}
-            <Form
-              setComenst={this.setComenst}
-              value={this.state.value}
-              onSubmit={this.onSubmit}
-            />
-            {/* <form>
-              <div>
-                <textarea
-                  onChange={this.setComenst}
-                  value={this.state.value}
-                  placeholder="enter your comment"
-                  cols="30"
-                  rows="5"
-                />
-              </div>
-              <button onClick={this.onSubmit}>SUBMIT</button>
-            </form> */}
-          </div>
-        ) : (
-          <NavLink className={styles.mainEmpty} to={"/"}>
-            What are you waiting for??? - click on something !!!
-          </NavLink>
-        )}
-
+        <div className={styles.main}>
+          <RetrievePost dataPost={this.props.dataPost} />
+          <Form
+            className={styles.main}
+            setComenst={this.setComenst}
+            value={this.state.value}
+            onSubmit={this.onSubmit}
+          />
+        </div>
         <Footer />
       </div>
     );
@@ -94,7 +57,7 @@ class SelectPost extends React.Component {
 }
 
 const MSTP = state => ({
-  dataPost: state.postsPage.dataPost
+  dataPost: getDataPost(state)
 });
 
 export default connect(

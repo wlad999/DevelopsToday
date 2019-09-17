@@ -4,10 +4,11 @@ import Footer from "../../components/Footer/Footer";
 import { connect } from "react-redux";
 import styles from "./Posts.module.css";
 import Posts from "./Posts";
+import { getPostsThunk, currentPageAC } from "../../redux/action/postsAction";
 import {
-  getPostsThunk,
-  currentPageAC
-} from "../../redux/reducers/postsReducer";
+  getAllPosts,
+  getCurrentPage
+} from "../../redux/selectors/postsSelectots";
 
 class PostsContainer extends React.Component {
   state = {};
@@ -32,8 +33,8 @@ class PostsContainer extends React.Component {
   }
 }
 let MSTP = state => ({
-  posts: state.postsPage.posts,
-  currentPage: state.postsPage.currentPage
+  posts: getAllPosts(state),
+  currentPage: getCurrentPage(state)
 });
 
 export default connect(

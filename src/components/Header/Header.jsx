@@ -1,11 +1,12 @@
 import React from "react";
 import styles from "./Header.module.css";
 import { NavLink } from "react-router-dom";
-import logo from "../../logo.svg";
+import logoDev from "../../logoDev.png";
 const Header = () => (
   <div className={styles.wrapper}>
-    <NavLink to={"/"}>
-      <img className={styles.logo} src={logo} alt="Logo" />
+    <NavLink className={styles.text} to={"/"}>
+      <img className={styles.logo} src={logoDev} alt="Logo" />
+      <span className={styles.text}>Develops Today</span>
     </NavLink>
     <span className={styles.nav}>
       <NavLink className={styles.link} to={"/"}>

@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Posts.module.css";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import Pagination from "../../components/Pagination/Pagination";
 
 const Posts = props => {
   let [currentPage, setCurrentPage] = useState(props.currentPage);
@@ -29,27 +30,26 @@ const Posts = props => {
   return (
     <div>
       <div className={styles.box}>
-        {pages.map(p => {
+        <Pagination
+          pages={pages}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+        {arrOfPosts.map(post => {
           return (
-            <span
-              key={p}
-              className={currentPage === p ? styles.selectedPage : styles.page}
-              onClick={e => {
-                setCurrentPage(p);
-              }}
-            >
-              {p}
-            </span>
-          );
-        })}
-        {arrOfPosts.map(Post => {
-          return (
-            <div className={styles.page} key={Post.id}>
-              <NavLink className={styles.nav} to={`/posts/${Post.id}`}>
-                <div className={styles.text}>TITLE {Post.title}</div>
-                <div className={styles.text}>AUTOR {Post.author}</div>
-                {Post.date && (
-                  <div className={styles.text}>PUBLISH DATA {Post.date}</div>
+            <div className={styles.page} key={post.id}>
+              <NavLink className={styles.nav} to={`/posts/${post.id}`}>
+                {post.title && (
+                  <div className={styles.text}>TITLE {post.title}</div>
+                )}
+                {post.author && (
+                  <div className={styles.text}>AUTOR {post.author}</div>
+                )}
+                {post.id && (
+                  <div className={styles.text}>POST ID {post.id}</div>
+                )}
+                {post.date && (
+                  <div className={styles.text}>PUBLISH DATA {post.date}</div>
                 )}
               </NavLink>
             </div>
