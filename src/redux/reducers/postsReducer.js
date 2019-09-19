@@ -3,7 +3,8 @@ import { actionTypes } from "../action/constants";
 let initialState = {
   posts: [],
   currentPage: 1,
-  dataPost: {}
+  dataPost: {},
+  comments: []
 };
 
 const potsReducer = (state = initialState, action) => {
@@ -27,6 +28,11 @@ const potsReducer = (state = initialState, action) => {
       return {
         ...state,
         dataPost: action.dataPost
+      };
+    case actionTypes.ADD_COMMENT:
+      return {
+        ...state,
+        comments: action.comments
       };
 
     default:

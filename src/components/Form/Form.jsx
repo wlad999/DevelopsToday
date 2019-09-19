@@ -3,7 +3,7 @@ const Form = props => {
   const { setComenst, value, onSubmit } = props;
   return (
     <div>
-      <form>
+      <form onSubmit={onSubmit}>
         <div>
           <textarea
             onChange={setComenst}
@@ -13,7 +13,7 @@ const Form = props => {
             rows="5"
           />
         </div>
-        <button onClick={onSubmit}>SUBMIT</button>
+        <button type="submit">SUBMIT</button>
       </form>
     </div>
   );

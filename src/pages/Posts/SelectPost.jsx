@@ -3,6 +3,7 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import styles from "./Posts.module.css";
 import Form from "../../components/Form/Form";
+import Comments from "./Comments";
 import RetrievePost from "./RetrievePost";
 import {
   getComentsThunk,
@@ -10,7 +11,7 @@ import {
   setComentsThunk
 } from "../../redux/action/postsAction";
 import { connect } from "react-redux";
-import { getDataPost } from "../../redux/selectors/postsSelectots";
+import { getDataPost, getComments } from "../../redux/selectors/postsSelectots";
 
 class SelectPost extends React.Component {
   state = {
@@ -23,7 +24,7 @@ class SelectPost extends React.Component {
   onSubmit = e => {
     e.preventDefault();
     this.props.setComentsThunk({
-      postId: this.props.match.params.id,
+      postId: Number(this.props.match.params.id),
       body: this.state.value
     });
     this.setState({ value: "" });
@@ -42,7 +43,11 @@ class SelectPost extends React.Component {
       <div className={styles.wrapper}>
         <Header />
         <div className={styles.main}>
-          <RetrievePost dataPost={this.props.dataPost} />
+          <RetrievePost
+            dataPost={this.props.dataPost}
+            comments={this.props.comments}
+          />
+          <Comments comments={this.props.comments} />
           <Form
             className={styles.main}
             setComenst={this.setComenst}
@@ -57,7 +62,8 @@ class SelectPost extends React.Component {
 }
 
 const MSTP = state => ({
-  dataPost: getDataPost(state)
+  dataPost: getDataPost(state),
+  comments: getComments(state)
 });
 
 export default connect(

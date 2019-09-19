@@ -18,6 +18,10 @@ export const setComentsAC = dataPost => ({
   type: actionTypes.SET_POST_DATA,
   dataPost
 });
+export const addComentsAC = comments => ({
+  type: actionTypes.ADD_COMMENT,
+  comments: comments
+});
 
 export const currentPageAC = currentPage => ({
   type: actionTypes.SET_CARRENT_PAGE,
@@ -33,17 +37,21 @@ export const getPostsThunk = () => {
 export const getComentsThunk = id => {
   return dispatch => {
     getComentsRequest(id).then(response => {
+      console.log("GET COMENTS", response);
       dispatch(setComentsAC(response.data));
-      console.log("TEST", response);
+      dispatch(addComentsAC(response.data.comments));
+      // console.log("TEST", response);
     });
   };
 };
 export const setComentsThunk = data => {
   return dispatch => {
     putComentsRequest({ ...data }).then(response => {
-      console.log("response", response.data.data.postId);
-      // dispatch(setComentsAC(response.data));
-      getComentsThunk(response.data.data.postI);
+      console.log("response", response.data.postId);
+      getComentsRequest(response.data.postId).then(response => {
+        console.log("SET COMRNTS", response.data);
+        dispatch(addComentsAC(response.data.comments));
+      });
     });
   };
 };

@@ -7,3 +7,6 @@ export const getCurrentPage = state => {
 export const getDataPost = state => {
   return state.postsPage.dataPost;
 };
+export const getComments = state => {
+  return state.postsPage.comments;
+};
