@@ -1,18 +1,20 @@
 import React from "react";
 import styles from "./Posts.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import Pagination from "../../components/Pagination/Pagination";
 
 const Posts = props => {
   let [currentPage, setCurrentPage] = useState(props.currentPage);
-
   props.currentPageAC(currentPage);
+
   let pagesCount;
   let pageSize = 10;
   if (props.posts && props.posts.length > 0) {
     pagesCount = Math.ceil(props.posts.length / pageSize);
   }
+  // useEffect(() => setCurrentPage(pagesCount), [pagesCount]);
+
   let pages = [];
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
@@ -51,7 +53,11 @@ const Posts = props => {
                 {post.date && (
                   <div className={styles.text}>PUBLISH DATA {post.date}</div>
                 )}
+                {post.body && (
+                  <div className={styles.text}>POST {post.body}</div>
+                )}
               </NavLink>
+              <button onClick={() => props.delPostThunk(post.id)}>X</button>
             </div>
           );
         })}

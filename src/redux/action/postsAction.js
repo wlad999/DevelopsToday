@@ -1,7 +1,11 @@
 import {
   getPostsRequest,
   getComentsRequest,
-  putComentsRequest
+  putComentsRequest,
+  putPostsRequest,
+  delPostRequest,
+  delCommentsRequest,
+  updatePostRequest
 } from "../../api/request";
 import { actionTypes } from "./constants";
 
@@ -37,21 +41,67 @@ export const getPostsThunk = () => {
 export const getComentsThunk = id => {
   return dispatch => {
     getComentsRequest(id).then(response => {
-      console.log("GET COMENTS", response);
+      // console.log("GET COMENTS", response);
       dispatch(setComentsAC(response.data));
       dispatch(addComentsAC(response.data.comments));
-      // console.log("TEST", response);
     });
   };
 };
 export const setComentsThunk = data => {
   return dispatch => {
     putComentsRequest({ ...data }).then(response => {
-      console.log("response", response.data.postId);
+      // console.log("response", response.data.postId);
       getComentsRequest(response.data.postId).then(response => {
-        console.log("SET COMRNTS", response.data);
+        // console.log("SET COMRNTS", response.data);
         dispatch(addComentsAC(response.data.comments));
       });
     });
   };
 };
+export const putPostThunk = data => {
+  return dispatch => {
+    putPostsRequest({ ...data })
+      .then(response => console.log("PUT POST", response))
+      .then(() =>
+        getPostsRequest().then(response => {
+          dispatch(getPostsAC(response.data));
+          console.log("PostsRequest", response);
+        })
+      );
+  };
+};
+export const updatePostThunk = (id, data) => {
+  return dispatch => {
+    updatePostRequest(id, { ...data })
+      .then(response => console.log("PUT POST", response))
+      .then(() =>
+        getComentsRequest(id).then(response => {
+          dispatch(setComentsAC(response.data));
+          dispatch(addComentsAC(response.data.comments));
+        })
+      );
+  };
+};
+export const delPostThunk = id => {
+  return dispatch =>
+    delPostRequest(id)
+      .then(response => console.log(`DELETE POST ${id}`, response))
+      .then(() =>
+        getPostsRequest().then(response => {
+          dispatch(getPostsAC(response.data));
+          console.log("PostsRequest", response);
+        })
+      );
+};
+export const delCommentsThunk = (commentId, postId) => {
+  return dispatch =>
+    delCommentsRequest(commentId)
+      .then(response => console.log(`DELETE COMMENTS ${commentId}`, response))
+      .then(() =>
+        getComentsRequest(postId).then(response => {
+          console.log("COMMETS", response.data);
+          dispatch(addComentsAC(response.data.comments));
+        })
+      );
+};
+// ------------------------------------------------------------------------

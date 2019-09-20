@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Posts.module.css";
 
 const Comments = props => {
-  const { comments } = props;
+  const { comments, delCommentsThunk, postId } = props;
   return (
     <div>
       <p>COMENTS:</p>
@@ -12,6 +12,9 @@ const Comments = props => {
             <div key={com.id}>
               <div>id: {com.id}</div>
               <div className={styles.com}>body: {com.body}</div>
+              <button onClick={() => delCommentsThunk(com.id, postId)}>
+                X
+              </button>
             </div>
           ))}
         </div>

@@ -46,7 +46,8 @@
 
 .list {
     overflow-y: auto;
-    height: 400px;
+    /* height: 400px; */
+    height: auto;
 }
 
 .nav {

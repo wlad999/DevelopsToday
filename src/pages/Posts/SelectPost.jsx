@@ -3,15 +3,24 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import styles from "./Posts.module.css";
 import Form from "../../components/Form/Form";
+import UpdatePost from "../../components/Form/UpdatePost";
 import Comments from "./Comments";
 import RetrievePost from "./RetrievePost";
+import Alternative from "./Alternative";
 import {
   getComentsThunk,
   delPostAC,
-  setComentsThunk
+  setComentsThunk,
+  delPostThunk,
+  delCommentsThunk,
+  updatePostThunk
 } from "../../redux/action/postsAction";
 import { connect } from "react-redux";
-import { getDataPost, getComments } from "../../redux/selectors/postsSelectots";
+import {
+  getDataPost,
+  getComments,
+  getPostId
+} from "../../redux/selectors/postsSelectots";
 
 class SelectPost extends React.Component {
   state = {
@@ -42,19 +51,32 @@ class SelectPost extends React.Component {
     return (
       <div className={styles.wrapper}>
         <Header />
-        <div className={styles.main}>
-          <RetrievePost
-            dataPost={this.props.dataPost}
-            comments={this.props.comments}
-          />
-          <Comments comments={this.props.comments} />
-          <Form
-            className={styles.main}
-            setComenst={this.setComenst}
-            value={this.state.value}
-            onSubmit={this.onSubmit}
-          />
-        </div>
+        {this.props.dataPost ? (
+          <div className={styles.main}>
+            <RetrievePost
+              dataPost={this.props.dataPost}
+              delPostThunk={this.props.delPostThunk}
+            />
+            <UpdatePost
+              updatePostThunk={this.props.updatePostThunk}
+              id={this.props.postId}
+            />
+            <Comments
+              comments={this.props.comments}
+              delCommentsThunk={this.props.delCommentsThunk}
+              postId={this.props.postId}
+            />
+            <Form
+              className={styles.main}
+              setComenst={this.setComenst}
+              value={this.state.value}
+              onSubmit={this.onSubmit}
+            />
+          </div>
+        ) : (
+          <Alternative />
+        )}
+
         <Footer />
       </div>
     );
@@ -63,7 +85,8 @@ class SelectPost extends React.Component {
 
 const MSTP = state => ({
   dataPost: getDataPost(state),
-  comments: getComments(state)
+  comments: getComments(state),
+  postId: getPostId(state)
 });
 
 export default connect(
@@ -71,6 +94,9 @@ export default connect(
   {
     getComentsThunk,
     delPostAC,
-    setComentsThunk
+    setComentsThunk,
+    delPostThunk,
+    delCommentsThunk,
+    updatePostThunk
   }
 )(SelectPost);
