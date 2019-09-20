@@ -10,7 +10,6 @@ const UpdatePost = props => {
 
   let onSubmit = e => {
     e.preventDefault();
-    console.log("ON SUBMIT", id, updatePostThunk);
 
     updatePostThunk(id, {
       title: title,

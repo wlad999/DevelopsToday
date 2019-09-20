@@ -38,6 +38,7 @@ export const putComentsRequest = data => {
     })
     .catch(error => console.log(error));
 };
+
 export const putPostsRequest = data => {
   return Axios.post(api.url.setPosts(), data)
     .then(resp => {

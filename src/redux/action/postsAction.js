@@ -82,6 +82,7 @@ export const updatePostThunk = (id, data) => {
       );
   };
 };
+
 export const delPostThunk = id => {
   return dispatch =>
     delPostRequest(id)

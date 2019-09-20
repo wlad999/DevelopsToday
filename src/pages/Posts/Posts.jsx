@@ -1,42 +1,45 @@
 import React from "react";
 import styles from "./Posts.module.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Pagination from "../../components/Pagination/Pagination";
 
 const Posts = props => {
   let [currentPage, setCurrentPage] = useState(props.currentPage);
   props.currentPageAC(currentPage);
-
   let pagesCount;
   let pageSize = 10;
   if (props.posts && props.posts.length > 0) {
     pagesCount = Math.ceil(props.posts.length / pageSize);
   }
-  // useEffect(() => setCurrentPage(pagesCount), [pagesCount]);
+
+  if (currentPage - pagesCount === 1) {
+    setCurrentPage(currentPage - 1);
+  }
 
   let pages = [];
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
 
-  let arrOfPosts = props.posts.filter(el => {
+  let reversPosts = props.posts.map(el => el).reverse();
+  let arrOfPosts = reversPosts.filter(el => {
     if (
-      props.posts.indexOf(el) < currentPage * 10 &&
-      props.posts.indexOf(el) >= currentPage * 10 - 10
+      reversPosts.indexOf(el) < currentPage * 10 &&
+      reversPosts.indexOf(el) >= currentPage * 10 - 10
     ) {
       return el;
     }
   });
 
   return (
-    <div>
-      <div className={styles.box}>
-        <Pagination
-          pages={pages}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
+    <div className={styles.box}>
+      <Pagination
+        pages={pages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
+      <div className={styles.scroll}>
         {arrOfPosts.map(post => {
           return (
             <div className={styles.page} key={post.id}>

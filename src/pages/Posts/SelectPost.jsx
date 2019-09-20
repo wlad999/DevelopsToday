@@ -2,8 +2,8 @@ import React from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import styles from "./Posts.module.css";
-import Form from "../../components/Form/Form";
-import UpdatePost from "../../components/Form/UpdatePost";
+import FormComment from "../../components/Form/FormComment";
+// import UpdatePost from "../../components/Form/UpdatePost";
 import Comments from "./Comments";
 import RetrievePost from "./RetrievePost";
 import Alternative from "./Alternative";
@@ -56,17 +56,20 @@ class SelectPost extends React.Component {
             <RetrievePost
               dataPost={this.props.dataPost}
               delPostThunk={this.props.delPostThunk}
-            />
-            <UpdatePost
               updatePostThunk={this.props.updatePostThunk}
               id={this.props.postId}
             />
+            {/* <UpdatePost
+              updatePostThunk={this.props.updatePostThunk}
+              id={this.props.postId}
+            /> */}
             <Comments
               comments={this.props.comments}
+              updateCommentThunk={this.props.updateCommentThunk}
               delCommentsThunk={this.props.delCommentsThunk}
               postId={this.props.postId}
             />
-            <Form
+            <FormComment
               className={styles.main}
               setComenst={this.setComenst}
               value={this.state.value}

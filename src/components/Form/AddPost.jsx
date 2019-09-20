@@ -1,5 +1,7 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import styles from "./AddPost.module.css";
+
+import { useState } from "react";
 const AddPost = props => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -15,11 +17,10 @@ const AddPost = props => {
     });
     setTitle("");
     setBody("");
-    props.onCloseForm();
   };
   return (
-    <div>
-      ADD POST
+    <div className={styles.addPost}>
+      add post
       <button onClick={props.onCloseForm}>close form</button>
       <form onSubmit={onSubmit}>
         <div>
@@ -38,10 +39,11 @@ const AddPost = props => {
             value={body}
             placeholder="enter your post"
             cols="30"
-            rows="5"
+            rows="3"
           />
         </div>
         <button type="submit">SUBMIT</button>
+        <button onClick={props.onCloseForm}>close form</button>
       </form>
     </div>
   );

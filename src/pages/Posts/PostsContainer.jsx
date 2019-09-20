@@ -39,6 +39,8 @@ class PostsContainer extends React.Component {
             currentPageAC={this.props.currentPageAC}
             onCloseForm={this.onCloseForm}
           />
+        </div>
+        <div>
           {!this.state.addPost ? (
             <button
               onClick={() => {

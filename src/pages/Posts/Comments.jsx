@@ -3,15 +3,16 @@ import styles from "./Posts.module.css";
 
 const Comments = props => {
   const { comments, delCommentsThunk, postId } = props;
+
   return (
     <div>
-      <p>COMENTS:</p>
+      <p>COMMENTS:</p>
       {comments && comments.length > 0 ? (
-        <div className={styles.list}>
+        <div className={styles.scroll}>
           {comments.map(com => (
             <div key={com.id}>
               <div>id: {com.id}</div>
-              <div className={styles.com}>body: {com.body}</div>
+              <div className={styles.com}>body:{com.body}</div>
               <button onClick={() => delCommentsThunk(com.id, postId)}>
                 X
               </button>
@@ -24,4 +25,5 @@ const Comments = props => {
     </div>
   );
 };
+
 export default Comments;

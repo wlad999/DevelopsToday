@@ -6,19 +6,20 @@
 }
 
 .page {
-    margin: 7px;
-    font-size: 13px;
+    margin: 3px;
+    font-size: 12px;
     cursor: pointer;
     /* padding-top: 10px */
 }
 
 .box {
-    padding-top: 10px
+    padding-top: 5px;
 }
 
-/* .com {
-    padding: 10px;
-} */
+.scroll {
+    overflow-y: auto;
+    height: 350px;
+}
 
 .wrapper {
     height: 100vh;
