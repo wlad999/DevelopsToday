@@ -20,8 +20,6 @@ const AddPost = props => {
   };
   return (
     <div className={styles.addPost}>
-      add post
-      <button onClick={props.onCloseForm}>close form</button>
       <form onSubmit={onSubmit}>
         <div>
           <div>

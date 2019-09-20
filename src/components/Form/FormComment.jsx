@@ -1,11 +1,12 @@
 import React from "react";
 import { useState } from "react";
+import styles from "./AddPost.module.css";
 const FormComment = props => {
   const [onMode, setMode] = useState(false);
   const { setComenst, value, onSubmit } = props;
   let onSetMode = () => setMode(!onMode);
   return (
-    <div>
+    <div className={styles.addPost}>
       {!onMode ? (
         <button onClick={onSetMode}>Add comment</button>
       ) : (

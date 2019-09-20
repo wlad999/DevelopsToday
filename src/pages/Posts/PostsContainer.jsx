@@ -47,7 +47,7 @@ class PostsContainer extends React.Component {
                 this.setState({ addPost: true });
               }}
             >
-              write post
+              add post
             </button>
           ) : (
             <AddPost

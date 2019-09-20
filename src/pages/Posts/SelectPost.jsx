@@ -69,17 +69,16 @@ class SelectPost extends React.Component {
               delCommentsThunk={this.props.delCommentsThunk}
               postId={this.props.postId}
             />
-            <FormComment
-              className={styles.main}
-              setComenst={this.setComenst}
-              value={this.state.value}
-              onSubmit={this.onSubmit}
-            />
           </div>
         ) : (
           <Alternative />
         )}
-
+        <FormComment
+          // className={styles.main}
+          setComenst={this.setComenst}
+          value={this.state.value}
+          onSubmit={this.onSubmit}
+        />
         <Footer />
       </div>
     );
