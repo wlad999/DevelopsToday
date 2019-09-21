@@ -4,9 +4,8 @@ import styles from "./Posts.module.css";
 const Comments = props => {
   const { comments, delCommentsThunk, postId } = props;
   let reverseComments = comments.map(el => el).reverse();
-
   return (
-    <div className={styles.scroll}>
+    <div>
       <p>COMMENTS:</p>
       {comments && comments.length > 0 ? (
         <div className={styles.scroll}>

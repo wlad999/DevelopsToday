@@ -73,12 +73,13 @@ class SelectPost extends React.Component {
         ) : (
           <Alternative />
         )}
-        <FormComment
-          // className={styles.main}
-          setComenst={this.setComenst}
-          value={this.state.value}
-          onSubmit={this.onSubmit}
-        />
+        {this.props.dataPost && (
+          <FormComment
+            setComenst={this.setComenst}
+            value={this.state.value}
+            onSubmit={this.onSubmit}
+          />
+        )}
         <Footer />
       </div>
     );

@@ -47,6 +47,7 @@ const RetrievePost = props => {
 
   return (
     <div className={styles.main}>
+      <p>POST ID: {dataPost.id}</p>
       <div onDoubleClick={activateModeTitle}>
         {!editModeTitle && (<p>TITLE: {dataPost.title}</p> || "NO TITLE")}
       </div>
@@ -60,7 +61,6 @@ const RetrievePost = props => {
           />
         </div>
       )}
-      <p>POST ID: {dataPost.id}</p>
       <div onDoubleClick={activateModeBody}>
         {!editModeBody && (<p>POST: {dataPost.body}</p> || "NO POST BODY")}
       </div>
