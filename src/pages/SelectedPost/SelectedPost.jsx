@@ -1,12 +1,12 @@
 import React from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import styles from "./Posts.module.css";
+import styles from "./Selected.module.css";
 import FormComment from "../../components/Form/FormComment";
 // import UpdatePost from "../../components/Form/UpdatePost";
-import Comments from "../Posts/Comments";
-import RetrievePost from "../Posts/RetrievePost";
-import Alternative from "../Posts/Alternative";
+import Comments from "../../components/Comments/Comments";
+import RetrievePost from "../../components/RetrievePost/RetrievePost";
+import Alternative from "./Alternative";
 import {
   getComentsThunk,
   delPostAC,
@@ -22,7 +22,7 @@ import {
   getPostId
 } from "../../redux/selectors/postsSelectots";
 
-class SelectPost extends React.Component {
+class SelectedPost extends React.Component {
   state = {
     value: ""
   };
@@ -75,6 +75,7 @@ class SelectPost extends React.Component {
         )}
         {this.props.dataPost && (
           <FormComment
+            className={styles.form}
             setComenst={this.setComenst}
             value={this.state.value}
             onSubmit={this.onSubmit}
@@ -102,4 +103,4 @@ export default connect(
     delCommentsThunk,
     updatePostThunk
   }
-)(SelectPost);
+)(SelectedPost);

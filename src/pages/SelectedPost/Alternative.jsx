@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import styles from "./Posts.module.css";
+import styles from "./Selected.module.css";
 
 const Alternative = () => {
   return (

@@ -68,3 +68,11 @@ p {
     font-weight: bold;
     margin: 5px;
 }
+
+.but {
+    margin: 5px;
+}
+
+/* *{
+    outline: 1px solid red
+} */

@@ -43,6 +43,7 @@ class PostsContainer extends React.Component {
         <div>
           {!this.state.addPost ? (
             <button
+              className={styles.but}
               onClick={() => {
                 this.setState({ addPost: true });
               }}

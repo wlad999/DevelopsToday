@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import styles from "./Posts.module.css";
+import styles from "./RetrievePost.module.css";
 
 const RetrievePost = props => {
   let [editModeTitle, setEditModeTitle] = useState(false);

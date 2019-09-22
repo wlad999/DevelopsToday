@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Posts.module.css";
+import styles from "./Comments.module.css";
 
 const Comments = props => {
   const { comments, delCommentsThunk, postId } = props;
