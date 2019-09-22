@@ -19,8 +19,10 @@
   color: #BE380D;
   margin: 0 5px;
   font-weight: bold;
-
+  font-size: 18px
 }
+
+
 
 .nav {
   padding-right: 10px;
@@ -38,5 +40,11 @@
   .link {
     font-size: 20px;
     padding: 0 5px 0 5px;
+  }
+}
+
+@media (max-width: 355px) {
+  .text {
+    font-size: 12px
   }
 }
