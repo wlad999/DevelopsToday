@@ -10,7 +10,7 @@ const Comments = props => {
       {comments && comments.length > 0 ? (
         <div className={styles.scroll}>
           {reverseComments.map(com => (
-            <div key={com.id}>
+            <div className={styles.comment} key={com.id}>
               <div>id: {com.id}</div>
               <div className={styles.com}>body:{com.body}</div>
               <button onClick={() => delCommentsThunk(com.id, postId)}>

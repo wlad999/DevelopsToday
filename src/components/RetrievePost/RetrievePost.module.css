@@ -34,7 +34,9 @@
     margin: 0;
     font-size: 12px;
     text-align: start;
-    padding: 5px
+    padding: 5px;
+    word-wrap: break-word;
+
 }
 
 .mainEmpty {

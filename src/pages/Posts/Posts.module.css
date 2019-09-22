@@ -9,7 +9,7 @@
     margin: 3px;
     font-size: 12px;
     cursor: pointer;
-    /* padding-top: 10px */
+    word-wrap: break-word;
 }
 
 .box {
@@ -19,6 +19,7 @@
 .scroll {
     overflow-y: auto;
     height: 350px;
+    width: 90%;
 }
 
 .wrapper {
@@ -37,26 +38,21 @@
     padding: 5px
 }
 
-.mainEmpty {
+/* .mainEmpty {
     width: 100%;
     margin: auto;
     font-size: 17px;
     font-weight: bold;
     text-decoration: none;
-}
+} */
 
-.list {
+/* .list {
     overflow-y: auto;
-    /* height: 400px; */
     height: auto;
-}
+} */
 
 .nav {
     text-decoration: none;
-}
-
-.nav:hover {
-    color: aqua;
 }
 
 .text {

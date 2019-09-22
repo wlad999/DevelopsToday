@@ -61,11 +61,14 @@ export const setComentsThunk = data => {
 export const putPostThunk = data => {
   return dispatch => {
     putPostsRequest({ ...data })
-      .then(response => console.log("PUT POST", response))
+      .then(
+        response => response
+        // console.log("PUT POST", response)
+      )
       .then(() =>
         getPostsRequest().then(response => {
           dispatch(getPostsAC(response.data));
-          console.log("PostsRequest", response);
+          // console.log("PostsRequest", response);
         })
       );
   };
@@ -86,7 +89,10 @@ export const updatePostThunk = (id, data) => {
 export const delPostThunk = id => {
   return dispatch =>
     delPostRequest(id)
-      .then(response => console.log(`DELETE POST ${id}`, response))
+      .then(
+        response => response
+        // console.log(`DELETE POST ${id}`, response)
+      )
       .then(() =>
         getPostsRequest().then(response => {
           dispatch(getPostsAC(response.data));
@@ -97,10 +103,13 @@ export const delPostThunk = id => {
 export const delCommentsThunk = (commentId, postId) => {
   return dispatch =>
     delCommentsRequest(commentId)
-      .then(response => console.log(`DELETE COMMENTS ${commentId}`, response))
+      .then(
+        response => response
+        // console.log(`DELETE COMMENTS ${commentId}`, response)
+      )
       .then(() =>
         getComentsRequest(postId).then(response => {
-          console.log("COMMETS", response.data);
+          // console.log("COMMETS", response.data);
           dispatch(addComentsAC(response.data.comments));
         })
       );

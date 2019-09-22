@@ -54,7 +54,7 @@ export const delCommentsRequest = id => {
   return Axios.delete(api.url.delComents(id))
     .then(resp => {
       // console.log(resp);
-      if (resp.status !== 201 || resp.status !== 200) {
+      if (resp.status !== 200) {
         throw new Error("ERROR");
       }
       return resp;
