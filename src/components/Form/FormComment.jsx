@@ -5,6 +5,7 @@ const FormComment = props => {
   const [onMode, setMode] = useState(false);
   const { setComenst, value, onSubmit } = props;
   let onSetMode = () => setMode(!onMode);
+  // let onSubmitValid = () => {};
   return (
     <div className={styles.addPost}>
       {!onMode ? (
@@ -21,6 +22,11 @@ const FormComment = props => {
                 rows="3"
               />
             </div>
+            {/* {this.state.commentValue.length > 10 ? (
+          <p className={styles.warning}>
+            Comment must be less than 300 characters
+          </p>
+        ) : null} */}
             <button type="submit">SUBMIT</button>
             <button onClick={onSetMode}>close form comment</button>
           </form>

@@ -3,7 +3,6 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import styles from "./Selected.module.css";
 import FormComment from "../../components/Form/FormComment";
-// import UpdatePost from "../../components/Form/UpdatePost";
 import Comments from "../../components/Comments/Comments";
 import RetrievePost from "../../components/RetrievePost/RetrievePost";
 import Alternative from "./Alternative";
@@ -24,28 +23,45 @@ import {
 
 class SelectedPost extends React.Component {
   state = {
-    value: ""
+    commentValue: "",
+    warning: ""
   };
 
   setComenst = e => {
-    this.setState({ value: e.target.value });
+    this.setState({ commentValue: e.target.value });
+    setTimeout(() => {
+      if (this.state.commentValue.length > 10) {
+        this.setState({ warning: "Comment must be less than 10 characters" });
+      } else {
+        this.setState({ warning: "" });
+      }
+    }, 10);
   };
+
   onSubmit = e => {
     e.preventDefault();
-    this.props.setComentsThunk({
-      postId: Number(this.props.match.params.id),
-      body: this.state.value
-    });
-    this.setState({ value: "" });
+    if (this.state.commentValue && this.state.commentValue.length <= 10) {
+      this.props.setComentsThunk({
+        postId: Number(this.props.match.params.id),
+        body: this.state.commentValue
+      });
+      this.setState({ commentValue: "" });
+      this.setState({ warning: "" });
+    } else if (!this.state.commentValue) {
+      setTimeout(() => {
+        this.setState({ warning: "Comment can't be empty" });
+        console.log("state", this.state);
+      }, 10);
+    }
   };
 
   componentDidMount() {
     this.props.getComentsThunk(this.props.match.params.id);
   }
+  componentDidUpdate() {}
 
   componentWillUnmount() {
     this.props.delPostAC();
-    console.log(this.props);
   }
   render() {
     return (
@@ -59,10 +75,6 @@ class SelectedPost extends React.Component {
               updatePostThunk={this.props.updatePostThunk}
               id={this.props.postId}
             />
-            {/* <UpdatePost
-              updatePostThunk={this.props.updatePostThunk}
-              id={this.props.postId}
-            /> */}
             <Comments
               comments={this.props.comments}
               updateCommentThunk={this.props.updateCommentThunk}
@@ -77,10 +89,13 @@ class SelectedPost extends React.Component {
           <FormComment
             className={styles.form}
             setComenst={this.setComenst}
-            value={this.state.value}
+            value={this.state.commentValue}
             onSubmit={this.onSubmit}
           />
         )}
+        {this.state.warning ? (
+          <p className={styles.warning}>{this.state.warning}</p>
+        ) : null}
         <Footer />
       </div>
     );
