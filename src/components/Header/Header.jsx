@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Header.module.css";
 // import windowSize from "react-window-size";
 import { NavLink } from "react-router-dom";
-import logoDev from "../../logoDev.png";
+import logoDev from "../../asset/images/logoDev.png";
 const Header = () => (
   <div className={styles.wrapper}>
     <NavLink className={styles.text} to={"/"}>

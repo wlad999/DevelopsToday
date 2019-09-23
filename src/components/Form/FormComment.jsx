@@ -4,7 +4,10 @@ import styles from "./AddPost.module.css";
 const FormComment = props => {
   const [onMode, setMode] = useState(false);
   const { setComenst, value, onSubmit, onCleanWarning } = props;
-  let onSetMode = () => setMode(!onMode);
+  let onSetMode = () => {
+    setMode(!onMode);
+    // !onMode && onCleanWarning();
+  };
   useEffect(() => {
     onCleanWarning(onMode);
   }, [onCleanWarning, onMode]);

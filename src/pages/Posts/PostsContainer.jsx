@@ -28,16 +28,22 @@ class PostsContainer extends React.Component {
   };
 
   render() {
+    const {
+      posts,
+      delPostThunk,
+      currentPage,
+      currentPageAC,
+      putPostThunk
+    } = this.props;
     return (
       <div className={styles.wrapper}>
-        <Header className={styles.header} />
+        <Header />
         <div className={styles.main}>
           <Posts
-            posts={this.props.posts}
-            delPostThunk={this.props.delPostThunk}
-            currentPage={this.props.currentPage}
-            currentPageAC={this.props.currentPageAC}
-            onCloseForm={this.onCloseForm}
+            posts={posts}
+            delPostThunk={delPostThunk}
+            currentPage={currentPage}
+            currentPageAC={currentPageAC}
           />
         </div>
         <div>
@@ -53,7 +59,7 @@ class PostsContainer extends React.Component {
           ) : (
             <AddPost
               onCloseForm={this.onCloseForm}
-              putPostThunk={this.props.putPostThunk}
+              putPostThunk={putPostThunk}
             />
           )}
         </div>
