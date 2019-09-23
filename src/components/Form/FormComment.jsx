@@ -1,11 +1,13 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./AddPost.module.css";
 const FormComment = props => {
   const [onMode, setMode] = useState(false);
-  const { setComenst, value, onSubmit } = props;
+  const { setComenst, value, onSubmit, onCleanWarning } = props;
   let onSetMode = () => setMode(!onMode);
-
+  useEffect(() => {
+    onCleanWarning(onMode);
+  }, [onCleanWarning, onMode]);
   return (
     <div className={styles.addPost}>
       {!onMode ? (

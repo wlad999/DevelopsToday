@@ -27,15 +27,20 @@ class SelectedPost extends React.Component {
     warning: ""
   };
 
+  onCleanWarning = onMode => {
+    if (!onMode) {
+      this.setState({ warning: "" });
+      this.setState({ commentValue: "" });
+    }
+  };
+
   setComenst = e => {
+    if (e.target.value.length > 10) {
+      this.setState({ warning: "Comment must be less than 10 characters" });
+    } else {
+      this.setState({ warning: "" });
+    }
     this.setState({ commentValue: e.target.value });
-    setTimeout(() => {
-      if (this.state.commentValue.length > 10) {
-        this.setState({ warning: "Comment must be less than 10 characters" });
-      } else {
-        this.setState({ warning: "" });
-      }
-    }, 10);
   };
 
   onSubmit = e => {
@@ -48,17 +53,14 @@ class SelectedPost extends React.Component {
       this.setState({ commentValue: "" });
       this.setState({ warning: "" });
     } else if (!this.state.commentValue) {
-      setTimeout(() => {
-        this.setState({ warning: "Comment can't be empty" });
-        console.log("state", this.state);
-      }, 10);
+      this.setState({ warning: "Comment can't be empty" });
+      console.log("state", this.state);
     }
   };
 
   componentDidMount() {
     this.props.getComentsThunk(this.props.match.params.id);
   }
-  componentDidUpdate() {}
 
   componentWillUnmount() {
     this.props.delPostAC();
@@ -91,6 +93,7 @@ class SelectedPost extends React.Component {
             setComenst={this.setComenst}
             value={this.state.commentValue}
             onSubmit={this.onSubmit}
+            onCleanWarning={this.onCleanWarning}
           />
         )}
         {this.state.warning ? (

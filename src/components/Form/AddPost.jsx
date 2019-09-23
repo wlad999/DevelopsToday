@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./AddPost.module.css";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 const AddPost = props => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
