@@ -4,10 +4,11 @@ import { NavLink } from "react-router-dom";
 import styles from "./RetrievePost.module.css";
 
 const RetrievePost = props => {
-  let [editModeTitle, setEditModeTitle] = useState(false);
-  let [editModeBody, setEditModeBody] = useState(false);
-  let [title, setTitle] = useState(props.dataPost.title);
-  let [body, setBody] = useState(props.dataPost.body);
+  const [editModeTitle, setEditModeTitle] = useState(false);
+  const [editModeBody, setEditModeBody] = useState(false);
+  const [title, setTitle] = useState(props.dataPost.title);
+  const [body, setBody] = useState(props.dataPost.body);
+  const [warning, setWarning] = useState("");
 
   const { dataPost, delPostThunk, updatePostThunk, id } = props;
 
@@ -25,23 +26,42 @@ const RetrievePost = props => {
     setEditModeBody(true);
   };
   const deactivateEditModeTitle = () => {
-    setEditModeTitle(false);
-    updatePostThunk(id, {
-      title: title,
-      body: body
-    });
+    if (title || body) {
+      setEditModeTitle(false);
+      updatePostThunk(id, {
+        title: title,
+        body: body
+      });
+    } else {
+      setWarning("Post can`t be empty");
+    }
   };
   const deactivateEditModeBody = () => {
-    setEditModeBody(false);
-    updatePostThunk(id, {
-      title: title,
-      body: body
-    });
+    if (title || body) {
+      setEditModeBody(false);
+      updatePostThunk(id, {
+        title: title,
+        body: body
+      });
+    } else {
+      setWarning("Post can`t be empty");
+    }
   };
+
   let onTitleChange = e => {
+    if (e.target.value.length > 10) {
+      setWarning("Title must be less than 10 characters");
+    } else {
+      setWarning("");
+    }
     setTitle(e.target.value);
   };
   let onBodyChange = e => {
+    if (e.target.value.length > 20) {
+      setWarning("Title must be less than 20 characters");
+    } else {
+      setWarning("");
+    }
     setBody(e.target.value);
   };
 
@@ -49,7 +69,8 @@ const RetrievePost = props => {
     <div className={styles.main}>
       <p>POST ID: {dataPost.id}</p>
       <div onDoubleClick={activateModeTitle}>
-        {!editModeTitle && (<p>TITLE: {dataPost.title}</p> || "NO TITLE")}
+        {!editModeTitle &&
+          (dataPost.title ? <p>TITLE: {dataPost.title}</p> : <p>"NO TITLE"</p>)}
       </div>
       {editModeTitle && (
         <div>
@@ -62,7 +83,12 @@ const RetrievePost = props => {
         </div>
       )}
       <div onDoubleClick={activateModeBody}>
-        {!editModeBody && (<p>POST: {dataPost.body}</p> || "NO POST BODY")}
+        {!editModeBody &&
+          (dataPost.body ? (
+            <p>POST: {dataPost.body}</p>
+          ) : (
+            <p> "NO POST BODY"</p>
+          ))}
       </div>
       {editModeBody && (
         <div>
@@ -76,6 +102,7 @@ const RetrievePost = props => {
       )}
       {dataPost.author && <p>AUTOR: {dataPost.author}</p>}
       {dataPost.date && <p>DATA:{dataPost.date}</p>}
+      {warning && <p className={styles.warning}>{warning}</p>}
       <NavLink className={styles.nav} to={`/`}>
         <button onClick={() => delPostThunk(dataPost.id)}>DELETE POST</button>
       </NavLink>

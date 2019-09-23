@@ -70,3 +70,7 @@ p {
     font-weight: bold;
     margin: 5px;
 }
+
+.warning {
+    color: red;
+}
