@@ -1,22 +1,41 @@
 import React from "react";
 import styles from "./AddPost.module.css";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 const AddPost = props => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const [warning, setWarning] = useState("");
 
-  const onTitleChange = e => setTitle(e.target.value);
-  const onBodyChange = e => setBody(e.target.value);
+  const onTitleChange = e => {
+    if (e.target.value.length > 10) {
+      setWarning("Title must be less than 10 characters");
+    } else {
+      setWarning("");
+    }
+    setTitle(e.target.value);
+  };
+  const onBodyChange = e => {
+    if (e.target.value.length > 20) {
+      setWarning("Title must be less than 20 characters");
+    } else {
+      setWarning("");
+    }
+    setBody(e.target.value);
+  };
 
   let onSubmit = e => {
     e.preventDefault();
-    props.putPostThunk({
-      title: title,
-      body: body
-    });
-    setTitle("");
-    setBody("");
+    if (title || body) {
+      props.putPostThunk({
+        title: title,
+        body: body
+      });
+      setTitle("");
+      setBody("");
+    } else {
+      setWarning("Post can`t be empty");
+    }
   };
   return (
     <div className={styles.addPost}>
@@ -40,6 +59,7 @@ const AddPost = props => {
             rows="3"
           />
         </div>
+        {warning && <p className={styles.warning}>{warning}</p>}
         <button type="submit">SUBMIT</button>
         <button onClick={props.onCloseForm}>close form</button>
       </form>

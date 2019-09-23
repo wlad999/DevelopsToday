@@ -7,3 +7,7 @@
     overflow-y: auto;
     height: 350px;
 }
+
+.warning {
+    color: red;
+}
