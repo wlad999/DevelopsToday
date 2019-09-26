@@ -26,26 +26,34 @@ const RetrievePost = props => {
     setEditModeBody(true);
   };
   const deactivateEditModeTitle = () => {
-    if (title || body) {
+    if ((title || body) && (title.length <= 10 && body.length <= 20)) {
       setEditModeTitle(false);
       updatePostThunk(id, {
         title: title,
         body: body
       });
-    } else {
+    } else if (title.length >= 10) {
+      setWarning("Title must be less than 10 characters");
+    } else if (!title && !body) {
       setWarning("Post can`t be empty");
     }
+    setEditModeTitle(false);
   };
   const deactivateEditModeBody = () => {
-    if (title || body) {
+    if ((title || body) && (title.length <= 10 && body.length <= 20)) {
       setEditModeBody(false);
       updatePostThunk(id, {
         title: title,
         body: body
       });
-    } else {
+    } else if (body.length >= 20) {
+      setWarning("Body must be less than 20 characters");
+      setEditModeBody(false);
+    } else if (!title && !body) {
       setWarning("Post can`t be empty");
+      setEditModeBody(false);
     }
+    setEditModeBody(false);
   };
 
   let onTitleChange = e => {

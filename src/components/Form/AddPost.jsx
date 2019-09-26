@@ -26,15 +26,25 @@ const AddPost = props => {
 
   let onSubmit = e => {
     e.preventDefault();
-    if (title || body) {
+    if ((title || body) && (title.length < 11 && body.length < 21)) {
       props.putPostThunk({
         title: title,
         body: body
       });
       setTitle("");
       setBody("");
-    } else {
+    } else if (!title && !body) {
       setWarning("Post can`t be empty");
+      console.log("Post can`t be empty");
+    } else if (title.length > 10 && body.length <= 20) {
+      setWarning("Title must be less than 10 characters");
+      console.log("Title must be less than 10 characters");
+    } else if (body.length > 20 && title.length <= 10) {
+      setWarning("Body must be less than 20 characters");
+      console.log("Body must be less than 20 characters");
+    } else if (title.length > 10 && body.length > 20) {
+      setWarning("Title and Body should be shorter");
+      console.log("Title and Body should be shorter");
     }
   };
   return (
