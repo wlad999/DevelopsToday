@@ -34,8 +34,12 @@ const RetrievePost = props => {
       });
     } else if (title.length >= 10) {
       setWarning("Title must be less than 10 characters");
+      setEditModeBody(false);
+      setTitle(props.dataPost.title);
     } else if (!title && !body) {
       setWarning("Post can`t be empty");
+      setEditModeBody(false);
+      setTitle(props.dataPost.title);
     }
     setEditModeTitle(false);
   };
@@ -49,9 +53,11 @@ const RetrievePost = props => {
     } else if (body.length >= 20) {
       setWarning("Body must be less than 20 characters");
       setEditModeBody(false);
+      setBody(props.dataPost.body);
     } else if (!title && !body) {
       setWarning("Post can`t be empty");
       setEditModeBody(false);
+      setBody(props.dataPost.body);
     }
     setEditModeBody(false);
   };
