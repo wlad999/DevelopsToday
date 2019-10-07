@@ -54,7 +54,10 @@ p {
 
 .but {
     margin: 5px;
+    cursor: pointer;
+
 }
+
 
 /* *{
     outline: 1px solid red

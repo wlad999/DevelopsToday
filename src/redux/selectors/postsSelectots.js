@@ -2,11 +2,6 @@ import { createSelector } from "reselect";
 export const getAllPosts = state => {
   return state.postsPage.posts;
 };
-// const getAllPostsSelector = state => {
-//   return state.postsPage.posts;
-// };
-// export const getAllPosts = createSelector(getAllPostsSelector);
-
 export const getCurrentPage = state => {
   return state.postsPage.currentPage;
 };

@@ -31,6 +31,9 @@ const Posts = props => {
       return el;
     }
   });
+  const delPost = e => {
+    props.delPostThunk(e.target.id);
+  };
 
   return (
     <div className={styles.box}>
@@ -60,7 +63,9 @@ const Posts = props => {
                   <div className={styles.text}>POST {post.body}</div>
                 )}
               </NavLink>
-              <button onClick={() => props.delPostThunk(post.id)}>X</button>
+              <button className={styles.but} onClick={delPost} id={post.id}>
+                X
+              </button>
             </div>
           );
         })}

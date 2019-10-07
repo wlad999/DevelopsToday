@@ -18,9 +18,6 @@ const Contact = () => (
           http://develops.today
         </a>
       </div>
-      <NavLink className={styles.nav} to={"/"}>
-        <h3>Don`t thinking - call us right now!</h3>
-      </NavLink>
     </main>
     <div className={styles.header}>
       <Footer />

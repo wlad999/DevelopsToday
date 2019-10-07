@@ -26,6 +26,9 @@ class PostsContainer extends React.Component {
   onCloseForm = () => {
     this.setState({ addPost: false });
   };
+  addPostForm = () => {
+    this.setState({ addPost: true });
+  };
 
   render() {
     const {
@@ -48,12 +51,7 @@ class PostsContainer extends React.Component {
         </div>
         <div>
           {!this.state.addPost ? (
-            <button
-              className={styles.but}
-              onClick={() => {
-                this.setState({ addPost: true });
-              }}
-            >
+            <button className={styles.but} onClick={this.addPostForm}>
               add post
             </button>
           ) : (

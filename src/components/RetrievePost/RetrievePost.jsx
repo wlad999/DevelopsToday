@@ -11,6 +11,7 @@ const RetrievePost = props => {
   const [warning, setWarning] = useState("");
 
   const { dataPost, delPostThunk, updatePostThunk, id } = props;
+  const delPost = () => delPostThunk(dataPost.id);
 
   useEffect(() => {
     setTitle(dataPost.title);
@@ -118,7 +119,7 @@ const RetrievePost = props => {
       {dataPost.date && <p>DATA:{dataPost.date}</p>}
       {warning && <p className={styles.warning}>{warning}</p>}
       <NavLink className={styles.nav} to={`/`}>
-        <button onClick={() => delPostThunk(dataPost.id)}>DELETE POST</button>
+        <button onClick={delPost}>DELETE POST</button>
       </NavLink>
     </div>
   );
